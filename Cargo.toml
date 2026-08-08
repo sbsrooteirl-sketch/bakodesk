@@ -1,11 +1,11 @@
 [package]
-name = "rustdesk"
+name = "Bakodesk"
 version = "1.4.9"
-authors = ["rustdesk <info@rustdesk.com>"]
+authors = ["Bakodesk <sarias@sbsroot.com>"]
 edition = "2021"
 build= "build.rs"
-description = "RustDesk Remote Desktop"
-default-run = "rustdesk"
+description = "Bakodesk Remote Desktop"
+default-run = "Bakodesk"
 rust-version = "1.75"
 
 [lib]
