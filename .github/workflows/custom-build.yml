@@ -15,25 +15,32 @@ jobs:
       - uses: actions/checkout@v4
         with:
           submodules: recursive
+
       - uses: dtolnay/rust-toolchain@stable
         with:
           targets: x86_64-pc-windows-msvc
+
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
+
       - run: flutter config --enable-windows-desktop
+
       - run: echo "LIBCLANG_PATH=C:\Program Files\LLVM\bin" | Out-File -FilePath $env:GITHUB_ENV -Append
+
       - name: Install vcpkg
         run: |
           git clone https://github.com/microsoft/vcpkg
           cd vcpkg
           .\bootstrap-vcpkg.bat
           echo "VCPKG_ROOT=$pwd" | Out-File -FilePath $env:GITHUB_ENV -Append
+
       - name: Install vcpkg packages
         run: |
-          cd vcpkg
-          .\vcpkg install libvpx:x64-windows-static libyuv:x64-windows-static opus:x64-windows-static aom:x64-windows-static
+          .\vcpkg\vcpkg install --triplet x64-windows-static
+
       - run: python3 .\build.py --flutter
+
       - uses: actions/upload-artifact@v4
         with:
           name: rustdesk-windows
