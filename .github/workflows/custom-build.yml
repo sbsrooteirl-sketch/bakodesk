@@ -22,7 +22,6 @@ jobs:
         with:
           channel: stable
       - run: flutter config --enable-windows-desktop
-      - run: choco install -y llvm --version=15.0.2
       - run: echo "LIBCLANG_PATH=C:\Program Files\LLVM\bin" | Out-File -FilePath $env:GITHUB_ENV -Append
       - run: python3 .\build.py --flutter --hwcodec
       - uses: actions/upload-artifact@v4
